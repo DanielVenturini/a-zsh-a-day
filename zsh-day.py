@@ -1,4 +1,5 @@
 import os
+import re
 import json
 
 # return the absolute path of zsh config file
@@ -8,9 +9,9 @@ def get_path(file):
 	return os.path.join(home_path, file)
 
 # open the ~/.zshrc or ~/.zshday
-def open_file(file):
+def open_file(file, mode='r'):
 	path = get_path(file)
-	return open(path)
+	return open(path, mode)
 
 # read the ~/.zshday and return the new theme
 # also, update the ~/.zshday file
@@ -26,10 +27,27 @@ def get_theme(zshday_file):
 		exit(1)
 	finally:
 		# before go out the function, update the .zshday file
-		json.dump(zshday_obj, open(get_path('./.zshday'), 'w'))
+		json.dump(zshday_obj, open(get_path('.zshday'), 'w'), indent=True)
 
-def update_theme(zshrc_file, new_theme):
-	pass
+# read all .zshrc file
+# re-write all lines at file
+# when re-writing, replace the 'ZSH_THEME="*"'
+# it's necessary because i'm reading and writing at same time in same file
+def update_theme(zshrc_file_reader, new_theme):
+	# read all zshrc lines
+	lines = zshrc_file_reader.readlines()
+
+	# open a new .zshrc file to write
+	with open_file(get_path('.zshrc'), 'w') as zshrc_file_writer:
+
+		for line in lines:
+			# ignore all line that starts with comments "#"
+			# and only verify others lines
+			if not line.startswith('#') and re.match('ZSH_THEME="[\w-]+"\n', line):
+				line = 'ZSH_THEME="{}"\n'.format(new_theme)
+
+			zshrc_file_writer.write(line)
+
 
 # open the ~/.zshrc file and the ~/.zshday file
 # then select and change the theme name
