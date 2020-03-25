@@ -8,13 +8,13 @@ def get_path(file):
 	home_path  = os.getenv('HOME')
 	return os.path.join(home_path, file)
 
-# open the ~/.zshrc or ~/.zshday
+# open the ~/.zshrc or ~/zshday/zshday
 def open_file(file, mode='r'):
 	path = get_path(file)
 	return open(path, mode)
 
-# read the ~/.zshday and return the new theme
-# also, update the ~/.zshday file
+# read the ~/.zshday/zshday and return the new theme
+# also, update the ~/.zshday/zshday file
 def get_theme(zshday_file):
 	zshday_obj = json.load(zshday_file)
 	try:
@@ -26,8 +26,8 @@ def get_theme(zshday_file):
 		print(str(ex))
 		exit(1)
 	finally:
-		# before go out the function, update the .zshday file
-		json.dump(zshday_obj, open(get_path('.zshday'), 'w'), indent=True)
+		# before go out the function, update the zshday file
+		json.dump(zshday_obj, open(get_path('.zshday/zshday'), 'w'), indent=True)
 
 # read all .zshrc file
 # re-write all lines at file
@@ -49,12 +49,12 @@ def update_theme(zshrc_file_reader, new_theme):
 			zshrc_file_writer.write(line)
 
 
-# open the ~/.zshrc file and the ~/.zshday file
+# open the ~/.zshrc file and the ~/.zshday/zshday file
 # then select and change the theme name
 def worker():
 	try:
 		zshrc_file  = open_file('.zshrc')
-		zshday_file = open_file('.zshday')
+		zshday_file = open_file('.zshday/zshday')
 
 		new_theme = get_theme(zshday_file)
 		update_theme(zshrc_file, new_theme)
