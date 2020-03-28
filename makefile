@@ -1,4 +1,5 @@
 all: create_config deps compile
+install: copy_exe anacron_script
 
 deps:
 	pip3 install -r requirements.txt
@@ -9,10 +10,10 @@ compile:
 create_config:
 	cp .zshday ~/.zshday
 
-cron_script:
-	sh cron_script.sh
+anacron_script:
+	echo '1\t0\tzsh-day\t/usr/bin/zsh-day' >> /etc/anacrontab
 
-install:
+copy_exe:
 	cp dist/zsh-day /usr/bin/ -r
 
 clean:
