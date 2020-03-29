@@ -2,16 +2,27 @@ import os
 import re
 import json
 
+
+# return the $HOME path
+def get_home():
+	try:
+		return open('/home/.zshuserpath').readline().strip()
+	except FileNotFoundError:
+		return os.getenv('HOME')
+
+
 # return the absolute path of zsh config file
 # '/home/venturini/.zshrc', eg.
 def get_path(file):
-	home_path  = os.getenv('HOME')
+	home_path = get_home()
 	return os.path.join(home_path, file)
+
 
 # open the ~/.zshrc or ~/.zshday
 def open_file(file, mode='r'):
 	path = get_path(file)
 	return open(path, mode)
+
 
 # read the ~/.zshday and return the new theme
 # also, update the ~/.zshday file
@@ -23,11 +34,12 @@ def get_theme(zshday_file):
 		zshday_obj['theme_of_day'] = (theme_number + 1) % len(zshday_obj['themes'])
 		return zshday_obj['themes'][theme_number]
 	except Exception as ex:
-		print(str(ex))
+		#print(str(ex))
 		exit(1)
 	finally:
 		# before go out the function, update the .zshday file
-		json.dump(zshday_obj, open(get_path('.zshday'), 'w'), indent=True)
+		json.dump(zshday_obj, open(get_path('.zshday'), 'w'), indent=2)
+
 
 # read all .zshrc file
 # re-write all lines at file
@@ -59,7 +71,7 @@ def worker():
 		new_theme = get_theme(zshday_file)
 		update_theme(zshrc_file, new_theme)
 	except FileNotFoundError as ex:
-		print(str(ex))
+		pass
 
 if __name__.__eq__('__main__'):
 	worker()
