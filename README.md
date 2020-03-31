@@ -1,8 +1,8 @@
 # a-zsh-a-day
 
-Do you like the **ZSH sheel**? Yes, you -- and everybody -- do.
+Do you like the **ZSH sheel**? Yes, you - and everybody - do.
 
-Do you like the **Oh My ZSH**? Yes, you -- and everyone -- do.
+Do you like the **Oh My ZSH**? Yes, you - and everyone - do.
 
 ![Alt text](https://i.ibb.co/JjtFD0b/ohmyzsh-themes.gif)
 
@@ -16,7 +16,7 @@ But, but... Have you ever thought about use a different theme a day? Every day i
 Annnd...**Voilà**. Every day your shell will look another shell. Don't you like the theme of day? Don't worry about it. Tomorrow it will look better... I hope :sweat_smile:
 
 ## Installation
-- Take a look if `anacron` is installed. If it isn't, install it with your package manager. Probably your **UNIX** system already has the `anacron` installed. If your system -- I know about `TinyCore` and `Slitaz` -- doesn't have the *anacron* available, you can use the *cron* with some limitations. To do it, see the Wiki.
+- Take a look if `anacron` is installed. If it isn't, install it with your package manager. Probably your **UNIX** system already has the `anacron` installed. If your system - I know about `TinyCore` and `Slitaz` - doesn't have the *anacron* available, you can use the `cron` with some limitations. To do it, see the Wiki.
 - Clone this repository in your home directory:
 ```bash
 git clone https://github.com/danielventurini/a-zsh-a-day/
