@@ -1,6 +1,8 @@
 import os
 import re
 import json
+from sys import exit
+from arguments import verify_args
 
 
 # return the $HOME path
@@ -67,6 +69,9 @@ def worker():
 	try:
 		zshrc_file  = open_file('.zshrc')
 		zshday_file = open_file('.zshday')
+
+		# if the execution is only to use args
+		verify_args(zshrc_file, zshday_file)
 
 		new_theme = get_theme(zshday_file)
 		update_theme(zshrc_file, new_theme)
