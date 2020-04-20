@@ -1,6 +1,5 @@
-#History
+1.0.0 / 2020-04-06
+==================
 
-1.0.0 / 2020-04-20
----
-- First release
-- `--theme` shows the theme day's name
+ * flag `--theme` shows the theme of day [#1](https://github.com/DanielVenturini/a-zsh-a-day/issues/1)
+ * initial release
